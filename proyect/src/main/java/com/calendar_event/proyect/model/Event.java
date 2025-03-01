@@ -1,11 +1,10 @@
 package com.calendar_event.proyect.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+@Entity
 public class Event {
 
     @Id
@@ -14,16 +13,20 @@ public class Event {
 
     private String title;
     private String description;
-    private LocalDateTime fechaInicio;
-    private LocalDateTime fechaFin;
+    private LocalDateTime starDateTime;
+    private LocalDateTime endDateTime;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user; //Lo relacionamos con el usuario
 
     public Event() {}
 
-    public Event(Long id, String title, String description, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+    public Event(Long id, String title, String description, LocalDateTime starDateTime, LocalDateTime endDateTime) {
         this.title = title;
         this.description = description;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.starDateTime = starDateTime;
+        this.endDateTime= endDateTime;
     }
 
     public Long getId() {
@@ -50,19 +53,19 @@ public class Event {
         this.description = description;
     }
 
-    public LocalDateTime getFechaInicio() {
-        return fechaInicio;
+    public LocalDateTime getStarDateTime() {
+        return starDateTime;
     }
 
-    public void setFechaInicio(LocalDateTime fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setStarDateTime(LocalDateTime starDateTime) {
+        this.starDateTime = starDateTime;
     }
 
-    public LocalDateTime getFechaFin() {
-        return fechaFin;
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
     }
 
-    public void setFechaFin(LocalDateTime fechaFin) {
-        this.fechaFin = fechaFin;
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
     }
 }
