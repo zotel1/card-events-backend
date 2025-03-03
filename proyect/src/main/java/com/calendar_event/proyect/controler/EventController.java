@@ -3,6 +3,7 @@ package com.calendar_event.proyect.controler;
 import com.auth0.jwt.JWT;
 import com.calendar_event.proyect.model.Event;
 import com.calendar_event.proyect.model.User;
+import com.calendar_event.proyect.service.EventService;
 import io.jsonwebtoken.Jwt;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventController {
 
     @Autowired
-    private  EventService eventService;
+    private EventService eventService;
 
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event, @AuthenticationPrincipal JWT jwt) {
