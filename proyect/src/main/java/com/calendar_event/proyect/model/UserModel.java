@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class User {
+public class UserModel {
     @Id
     private String id;
 
@@ -17,7 +17,7 @@ public class User {
     private String name; //Nombre de nuestro usuario
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Event> evenmmts = new ArrayList<>();
+    private List<EventModel> evenmmts = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -43,11 +43,11 @@ public class User {
         this.name = name;
     }
 
-    public List<Event> getEvenmmts() {
+    public List<EventModel> getEvenmmts() {
         return evenmmts;
     }
 
-    public void setEvenmmts(List<Event> evenmmts) {
+    public void setEvenmmts(List<EventModel> evenmmts) {
         this.evenmmts = evenmmts;
     }
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class Event {
+public class EventModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +16,14 @@ public class Event {
     private LocalDateTime starDateTime;
     private LocalDateTime endDateTime;
 
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user; //Lo relacionamos con el usuario
+    private UserModel user; //Lo relacionamos con el usuario
 
-    public Event() {}
+    public EventModel() {}
 
-    public Event(Long id, String title, String description, LocalDateTime starDateTime, LocalDateTime endDateTime) {
+    public EventModel(Long id, String title, String description, LocalDateTime starDateTime, LocalDateTime endDateTime) {
         this.title = title;
         this.description = description;
         this.starDateTime = starDateTime;

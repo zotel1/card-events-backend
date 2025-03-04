@@ -1,8 +1,8 @@
 package com.calendar_event.proyect.controler;
 
 import com.auth0.jwt.JWT;
-import com.calendar_event.proyect.model.Event;
-import com.calendar_event.proyect.model.User;
+import com.calendar_event.proyect.model.EventModel;
+import com.calendar_event.proyect.model.UserModel;
 import com.calendar_event.proyect.service.EventService;
 import io.jsonwebtoken.Jwt;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -21,17 +21,17 @@ public class EventController {
     private EventService eventService;
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody Event event, @AuthenticationPrincipal JWT jwt) {
+    public ResponseEntity<EventModel> createEvent(@RequestBody EventModel event, @AuthenticationPrincipal JWT jwt) {
         String userId = jwt.getSubject(); // Obtiene el user_id del token JWT
-        event.setUser(new User(userId)); // Asocia el evento al usuario
-        Event savedEvent = eventService.save(event);
+        event.setUser(new UserModel(userId)); // Asocia el evento al usuario
+        EventModel savedEvent = eventService.save(event);
         return ResponseEntity.ok(savedEvent);
     }
 
     @GetMapping
-    public ResponseEntity<List<Event>> getEvents(@AuthenticationPrincipal Jwt jwt) {
+    public ResponseEntity<List<EventModel>> getEvents(@AuthenticationPrincipal Jwt jwt) {
         String userId = jwt.getSubject();
-        List<Event> events = eventService.findByUserId(userId);
+        List<EventModel> events = eventService.findByUserId(userId);
         return ResponseEntity.ok(events);
     }
 }
