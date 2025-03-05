@@ -31,4 +31,24 @@ public class EventService {
         return eventRepository.findByUserIdAndStartDateTimeBetween(userId, start, end);
     }
 
+    // Actualizar un evento
+    public EventModel updateEvent(Long eventId, EventModel updatedEvent, String userId) {
+        EventModel existingEvent = eventRepository.findByIdAndUserId(eventId, userId)
+                .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
+        existingEvent.setTitle(updatedEvent.getTitle());
+        existingEvent.setDescription(updatedEvent.getDescription());
+        existingEvent.setStartDateTime(updatedEvent.getStartDateTime());
+        existingEvent.setEndDateTime(updatedEvent.getEndDateTime());
+        existingEvent.setLocation(updatedEvent.getLocation());
+        existingEvent.setEventType(updatedEvent.getEventType());
+        return eventRepository.save(existingEvent);
+    }
+
+    // Eliminar un evento
+    public void deleteEvent(Long eventId, String userId) {
+        EventModel event = eventRepository.findByIdAndUserId(eventId, userId)
+                .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
+        eventRepository.delete(event);
+    }
+
 }
