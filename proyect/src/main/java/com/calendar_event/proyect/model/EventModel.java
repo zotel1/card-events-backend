@@ -21,6 +21,7 @@ public class EventModel {
     @JoinColumn(name = "user_id", nullable = false)
     private UserModel user; //Lo relacionamos con el usuario
 
+    /*
     public EventModel() {}
 
     public EventModel(Long id, String title, String description, LocalDateTime starDateTime, LocalDateTime endDateTime) {
@@ -28,7 +29,7 @@ public class EventModel {
         this.description = description;
         this.starDateTime = starDateTime;
         this.endDateTime= endDateTime;
-    }
+    } */
 
     public Long getId() {
         return id;
