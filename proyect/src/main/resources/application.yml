@@ -1,0 +1,40 @@
+#spring.application.name=calendar event backend
+spring:
+  datasource:
+    url: ${MYSQL_URL}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    enabled: true
+    locations: classpath:/db/migration
+    validate-on-migrate: false
+  jpa:
+    hibernate:
+      ddl-auto: validate  # O ajusta a update/create según necesites
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  server:
+    error:
+      include-stacktrace: never
+
+  springdoc:
+    api-docs:
+      enabled: true
+      path: /v3/api-docs
+    swagger-ui:
+      enabled: true
+      path: /swagger-ui.html
+      operations-sorter: method
+      display-request-duration: true
+      disable-swagger-default-url: true
+
+  logging:
+    level:
+      org.springframework.security: DEBUG
+
+  api:
+    security:
+      secret: ${JWT_SECRET:123456}

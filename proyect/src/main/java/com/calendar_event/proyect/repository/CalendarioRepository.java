@@ -1,4 +1,7 @@
 package com.calendar_event.proyect.repository;
 
-public interface CalendarioRepository extends JpaRepository<Evento, Long>{
+import com.calendar_event.proyect.model.EventModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CalendarioRepository extends JpaRepository<EventModel, Long> {
 }
