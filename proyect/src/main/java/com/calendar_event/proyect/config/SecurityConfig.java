@@ -13,13 +13,14 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/api/calendario").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+                .csrf().disable() // Desactiva CSRF para APIs
+                .authorizeRequests()
+                .antMatchers("/api/events/**").authenticated() // Protege los endpoints de eventos
+                .anyRequest().permitAll() // Permite acceso público a otros endpoints
+                .and()
+                .oauth2ResourceServer().jwt(); // Habilita el soporte para JWT
 
         return http.build();
     }
