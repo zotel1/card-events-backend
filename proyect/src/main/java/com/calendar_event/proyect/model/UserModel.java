@@ -19,6 +19,15 @@ public class UserModel {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EventModel> evenmmts = new ArrayList<>();
 
+    public UserModel() {}
+
+    public UserModel(String id, String email, String name, List<EventModel> evenmmts) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.evenmmts = evenmmts;
+    }
+
     public String getId() {
         return id;
     }
