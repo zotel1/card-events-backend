@@ -28,6 +28,10 @@ public class UserModel {
         this.evenmmts = evenmmts;
     }
 
+    public UserModel(String userId) {
+
+    }
+
     public String getId() {
         return id;
     }
