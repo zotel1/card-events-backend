@@ -6,12 +6,13 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EventRepository extends JpaRepository<EventModel, Long> {
 
     // Encuantra todos los eventos del usuario
-        List<EventModel> findByUserId(String userId);
+        Optional<EventModel> findByIdAndUserId(String userId);
 
 
     // Encuentra eventos de un usuario en un rango de fechas

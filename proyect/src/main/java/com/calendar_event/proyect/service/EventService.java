@@ -23,7 +23,7 @@ public class EventService {
 
     // Obtenemos todos los usuarios en un rango de fechas
     public List<EventModel> getEventsByUserId(String userId) {
-        return eventRepository.findByUserId(userId);
+        return eventRepository.findByIdAndUserId(userId);
     }
 
     // Obtenemos eventos de un usuario en un rango de fechas
@@ -33,8 +33,10 @@ public class EventService {
 
     // Actualizar un evento
     public EventModel updateEvent(Long eventId, EventModel updatedEvent, String userId) {
-        EventModel existingEvent = eventRepository.findByIdAndUserId(eventId, userId)
-                .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
+        EventModel existingEvent = eventRepository.findByIdAndUserId(eventId, userId);
+        if (existingEvent == null) {
+            throw new RuntimeException("Evento no encontrado");
+        }
         existingEvent.setTitle(updatedEvent.getTitle());
         existingEvent.setDescription(updatedEvent.getDescription());
         existingEvent.setStartDateTime(updatedEvent.getStartDateTime());
