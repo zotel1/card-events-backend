@@ -11,7 +11,7 @@ spring:
     validate-on-migrate: false
   jpa:
     hibernate:
-      ddl-auto: validate  # O ajusta a update/create según necesites
+      ddl-auto: validate  # O ajusta a update/create segï¿½n necesites
     show-sql: true
     properties:
       hibernate:
