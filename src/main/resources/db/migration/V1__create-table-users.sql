@@ -1,5 +1,5 @@
-create table user (
-id varchar(255) primary key,
-email varchar(255),
-name varchar(255)
+CREATE TABLE user (
+    id VARCHAR(255) PRIMARY KEY,
+    email VARCHAR(255),
+    name VARCHAR(255)
 );

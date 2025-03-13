@@ -1,4 +1,4 @@
-create table event-category (
-id bigint auto_increment primary key,
-name varchar(255) not null
+CREATE TABLE event_category (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
 );
