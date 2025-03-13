@@ -12,12 +12,13 @@ import java.util.Optional;
 public interface EventRepository extends JpaRepository<EventModel, Long> {
 
     // Encuantra todos los eventos del usuario
-        Optional<EventModel> findByIdAndUserId(String userId);
+    Optional<EventModel> findByIdAndUserId(Long id, String userId);
+
 
 
     // Encuentra eventos de un usuario en un rango de fechas
     List<EventModel> findByUserIdAndStartDateTimeBetween(String userId, LocalDateTime start, LocalDateTime end);
 
     // Encuentra un evento por su ID y el ID del usuario ( para asegurar que el usuario solo acceda a sus eventos
-    EventModel findByIdAndUserId(Long id, String userId);
+   // EventModel findByIdAndUserId(Long id, String userId);
 }

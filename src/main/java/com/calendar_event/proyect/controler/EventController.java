@@ -25,7 +25,6 @@ public class EventController {
     @PostMapping
     public ResponseEntity<EventModel> createEvent(@RequestBody EventModel event, @AuthenticationPrincipal Jwt jwt) {
         String userId = jwt.getSubject();
-        event.setUser(new UserModel(userId));
         EventModel savedEvent = eventService.createEvent(event, userId);
         return ResponseEntity.ok(savedEvent);
     }
@@ -50,7 +49,7 @@ public class EventController {
         return ResponseEntity.ok(events);
     }
 
-    // Actualizar un evento
+    // Actualizamos un evento
     @PutMapping("/{eventId}")
     public ResponseEntity<EventModel> updateEvent(
             @PathVariable Long eventId,
