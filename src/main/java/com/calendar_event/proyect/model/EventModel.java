@@ -14,7 +14,7 @@ public class EventModel {
 
     private String title;
     private String description;
-    private LocalDateTime starDateTime;
+    private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
 
 
@@ -25,10 +25,11 @@ public class EventModel {
 
     public EventModel() {}
 
-    public EventModel(Long id, String title, String description, LocalDateTime starDateTime, LocalDateTime endDateTime) {
+    public EventModel(Long id, String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        this.id = id;
         this.title = title;
         this.description = description;
-        this.starDateTime = starDateTime;
+        this.startDateTime = startDateTime;
         this.endDateTime= endDateTime;
     }
 
@@ -56,12 +57,12 @@ public class EventModel {
         this.description = description;
     }
 
-    public LocalDateTime getStarDateTime() {
-        return starDateTime;
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
     }
 
-    public void setStarDateTime(LocalDateTime starDateTime) {
-        this.starDateTime = starDateTime;
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
     }
 
     public LocalDateTime getEndDateTime() {

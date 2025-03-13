@@ -14,6 +14,9 @@ public interface EventRepository extends JpaRepository<EventModel, Long> {
     // Encuantra todos los eventos del usuario
     Optional<EventModel> findByIdAndUserId(Long id, String userId);
 
+    List<EventModel> findByUserId(String userId);
+
+
 
 
     // Encuentra eventos de un usuario en un rango de fechas

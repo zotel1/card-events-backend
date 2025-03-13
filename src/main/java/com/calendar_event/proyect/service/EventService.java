@@ -11,38 +11,44 @@ import java.util.List;
 
 @Service
 public class EventService {
-
     @Autowired
     private EventRepository eventRepository;
 
-    //Creamos un evento
+    // Crear un evento
     public EventModel createEvent(EventModel event, String userId) {
-        event.setUser(new UserModel(userId));
+        event.setUser(new UserModel(userId)); // Asocia el evento al usuario
         return eventRepository.save(event);
     }
 
-    // Obtenemos todos los usuarios en un rango de fechas
+    // Obtener todos los eventos de un usuario
     public List<EventModel> getEventsByUserId(String userId) {
-        return eventRepository.findByIdAndUserId(userId);
+        return eventRepository.findByUserId(userId);
     }
 
-    // Obtenemos eventos de un usuario en un rango de fechas
+    // Obtener eventos de un usuario en un rango de fechas
     public List<EventModel> getEventsByDateRange(String userId, LocalDateTime start, LocalDateTime end) {
         return eventRepository.findByUserIdAndStartDateTimeBetween(userId, start, end);
     }
 
     // Actualizar un evento
     public EventModel updateEvent(Long eventId, EventModel updatedEvent, String userId) {
-        EventModel existingEvent = eventRepository.findByIdAndUserId(eventId, userId);
-        if (existingEvent == null) {
-            throw new RuntimeException("Evento no encontrado");
+        EventModel existingEvent = eventRepository.findByIdAndUserId(eventId, userId)
+                .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
+
+        // Actualiza solo los campos que fueron modificados
+        if (updatedEvent.getTitle() != null) {
+            existingEvent.setTitle(updatedEvent.getTitle());
         }
-        existingEvent.setTitle(updatedEvent.getTitle());
-        existingEvent.setDescription(updatedEvent.getDescription());
-        existingEvent.setStartDateTime(updatedEvent.getStartDateTime());
-        existingEvent.setEndDateTime(updatedEvent.getEndDateTime());
-        existingEvent.setLocation(updatedEvent.getLocation());
-        existingEvent.setEventType(updatedEvent.getEventType());
+        if (updatedEvent.getDescription() != null) {
+            existingEvent.setDescription(updatedEvent.getDescription());
+        }
+        if (updatedEvent.getStartDateTime() != null) {
+            existingEvent.setStartDateTime(updatedEvent.getStartDateTime());
+        }
+        if (updatedEvent.getEndDateTime() != null) {
+            existingEvent.setEndDateTime(updatedEvent.getEndDateTime());
+        }
+
         return eventRepository.save(existingEvent);
     }
 
@@ -52,5 +58,4 @@ public class EventService {
                 .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
         eventRepository.delete(event);
     }
-
 }
