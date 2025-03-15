@@ -1,6 +1,7 @@
 package com.calendar_event.proyect.filter;
 
 import com.calendar_event.proyect.service.JwtTokenService;
+import com.calendar_event.proyect.service.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
